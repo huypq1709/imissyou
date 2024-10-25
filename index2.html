@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="favicon_io/favicon.ico">
+  <title>Virus M...</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    #fullscreenButton {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px 40px;
+      font-size: 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .box {
+      position: absolute;
+      width: 400px;
+      height: 300px;
+      pointer-events: none;
+      
+    }
+    .box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="fullscreenButton">Hey You Click Here</button>
+
+  <script>
+    const fullscreenButton = document.getElementById('fullscreenButton');
+
+    // Hàm kích hoạt chế độ toàn màn hình
+    function openFullscreen() {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari và Opera
+        document.documentElement.webkitRequestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+        document.documentElement.msRequestFullscreen();
+      }
+    }
+
+    // Hàm tạo ra một hộp hình ảnh
+    function createBox() {
+      const box = document.createElement('div');
+      box.classList.add('box');
+
+      // Thay thế bằng hình ảnh của bạn
+      const img = document.createElement('img');
+      img.src = "/virus warning.png"; 
+      box.appendChild(img);
+
+      document.body.appendChild(box);
+
+      // Đặt vị trí ngẫu nhiên cho hộp hình ảnh
+      const randomX = Math.random() * window.innerWidth;
+      const randomY = Math.random() * window.innerHeight;
+      box.style.left = `${randomX}px`;
+      box.style.top = `${randomY}px`;
+    }
+
+    // Sau khi nhấn nút, mở toàn màn hình, ẩn nút và bắt đầu tạo hộp hình ảnh
+    fullscreenButton.addEventListener('click', function() {
+      openFullscreen();
+      fullscreenButton.style.display = 'none'; // Ẩn nút
+
+      // Cứ mỗi 0.5 giây tạo ra một hộp hình ảnh
+      setInterval(createBox, 100);
+    });
+  </script>
+
+</body>
+</html>
