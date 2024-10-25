@@ -60,8 +60,13 @@
     function runMusic(){
       const audio = new Audio('/music3.mp3');
       audio.play();
-      
+      audio.addEventListener('ended', function() {
+            audio.currentTime = 0; // Đặt thời gian hiện tại về 0
+            audio.play(); // Phát lại nhạc
+        });
     }
+
+    
 
     // Hàm tạo ra một hộp hình ảnh
     function createBox() {
